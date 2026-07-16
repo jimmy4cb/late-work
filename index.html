@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agoro Sare High School | Billing & Payment System</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Agoro Sare High School</p>
+        <h1>Billing & Fee Payment System</h1>
+        <p>Automated invoicing, parent-ledger visibility, and real-time payment tracking.</p>
+      </div>
+      <div class="hero-badge">Kenyan school finance</div>
+    </header>
+
+    <main class="container">
+      <section class="panel summary-panel">
+        <div class="summary-card accent">
+          <h3>Outstanding Balance</h3>
+          <p id="summary-balance">KES 0</p>
+        </div>
+        <div class="summary-card">
+          <h3>Fees Collected</h3>
+          <p id="summary-collected">KES 0</p>
+        </div>
+        <div class="summary-card">
+          <h3>Active Students</h3>
+          <p id="summary-students">0</p>
+        </div>
+      </section>
+
+      <nav class="tabs" aria-label="System sections">
+        <button class="tab active" data-target="dashboard">Dashboard</button>
+        <button class="tab" data-target="students">Students</button>
+        <button class="tab" data-target="fees">Fee Structure</button>
+        <button class="tab" data-target="billing">Billing & Payments</button>
+        <button class="tab" data-target="portal">Parent Portal</button>
+        <button class="tab" data-target="reports">Reports</button>
+      </nav>
+
+      <section id="dashboard" class="section active">
+        <div class="panel">
+          <h2>Administration dashboard</h2>
+          <p class="muted">Monitor fee collection health, student ledgers, and term-level activity.</p>
+          <div class="dashboard-grid">
+            <div class="card">
+              <h3>Term 1 status</h3>
+              <ul id="term-status"></ul>
+            </div>
+            <div class="card">
+              <h3>M-Pesa / Bank receipts</h3>
+              <ul id="receipt-log"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="students" class="section">
+        <div class="panel">
+          <h2>Student information</h2>
+          <form id="student-form" class="stack-form">
+            <input type="text" id="adm-no" placeholder="Admission Number" required />
+            <input type="text" id="student-name" placeholder="Student Name" required />
+            <input type="text" id="student-class" placeholder="Class" required />
+            <input type="text" id="student-stream" placeholder="Stream" required />
+            <input type="text" id="student-house" placeholder="House" required />
+            <button type="submit">Save student</button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h3>Student ledger</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Adm. No.</th>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Stream</th>
+                <th>House</th>
+                <th>Balance</th>
+              </tr>
+            </thead>
+            <tbody id="student-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="fees" class="section">
+        <div class="panel">
+          <h2>Fee structure</h2>
+          <form id="votehead-form" class="stack-form">
+            <input type="text" id="votehead-name" placeholder="Votehead name" required />
+            <input type="number" id="votehead-amount" placeholder="Default amount" min="0" required />
+            <button type="submit">Add votehead</button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h3>Voteheads</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Votehead</th>
+                <th>Default Amount</th>
+              </tr>
+            </thead>
+            <tbody id="votehead-table"></tbody>
+          </table>
+        </div>
+
+        <div class="panel">
+          <h3>Class and stream overrides</h3>
+          <form id="override-form" class="stack-form">
+            <select id="override-votehead"></select>
+            <input type="text" id="override-class" placeholder="Class" required />
+            <input type="text" id="override-stream" placeholder="Stream" required />
+            <input type="number" id="override-amount" placeholder="Override amount" min="0" required />
+            <button type="submit">Save override</button>
+          </form>
+          <table>
+            <thead>
+              <tr>
+                <th>Votehead</th>
+                <th>Class</th>
+                <th>Stream</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody id="override-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="billing" class="section">
+        <div class="panel">
+          <h2>Invoices & payments</h2>
+          <form id="invoice-form" class="stack-form">
+            <select id="invoice-student"></select>
+            <select id="invoice-term">
+              <option>Term 1</option>
+              <option>Term 2</option>
+              <option>Term 3</option>
+            </select>
+            <button type="submit">Generate invoice</button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h3>Payment recording</h3>
+          <form id="payment-form" class="stack-form">
+            <select id="payment-student"></select>
+            <input type="number" id="payment-amount" placeholder="Amount" min="0" required />
+            <select id="payment-mode">
+              <option>M-Pesa</option>
+              <option>Bank</option>
+              <option>Cash</option>
+            </select>
+            <input type="text" id="payment-reference" placeholder="Reference" required />
+            <button type="submit">Record payment</button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h3>Transaction history</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Mode</th>
+                <th>Reference</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="transaction-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="portal" class="section">
+        <div class="panel">
+          <h2>Parent portal</h2>
+          <form id="parent-form" class="stack-form">
+            <input type="text" id="parent-adm" placeholder="Admission Number" required />
+            <button type="submit">View statement</button>
+          </form>
+          <div id="parent-output" class="portal-output"></div>
+        </div>
+      </section>
+
+      <section id="reports" class="section">
+        <div class="panel">
+          <h2>Financial reports</h2>
+          <div id="report-output"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
